@@ -5,6 +5,7 @@ var twilio = require('twilio');
 
 var AppointmentSchema = new mongoose.Schema({
   name:String,
+  message: String,
   phoneNumber: String,
   notification : Number,
   timeZone : String,
@@ -41,9 +42,10 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
         docs.forEach(function(appointment) {
             // Create options to send the message
             var options = {
-                to: "+" + appointment.phoneNumber,
+                to: "+1" + appointment.phoneNumber,
                 from: cfg.twilioPhoneNumber,
-                body: "Hi " + appointment.name + ". Just a reminder that you have an appointment coming up  " + moment(appointment.time).calendar() +"."
+                body: "Hi " + appointment.name + " . " + appointment.message + moment(appointment.time).calendar() +"."
+            //     body: "Hi " + appointment.name + ". Just a reminder that you have an appointment coming up  " + moment(appointment.time).calendar() +"."
             };
 
             // Send the message!

@@ -34,12 +34,13 @@ router.get('/create', function(req, res, next) {
 router.post('/', function(req, res, next) {
     var name = req.body.name;
     var phoneNumber = req.body.phoneNumber;
+    var message = req.body.message;
     var notification = req.body.notification;
     var timeZone = req.body.timeZone;
     var time = moment(req.body.time, "MM-DD-YYYY hh:mma");
     var listOfAppointments= req.body.appointment;
 
-    var appointment = new Appointment({ name: name, phoneNumber: phoneNumber, notification: notification, time: time, timeZone: timeZone });
+    var appointment = new Appointment({ name: name, phoneNumber: phoneNumber, message: message, notification: notification, time: time, timeZone: timeZone });
     console.log(timeZone);
     appointment.save(function(err) {
         if (err) {
@@ -49,7 +50,7 @@ router.post('/', function(req, res, next) {
             res.redirect('/');
         }
     });
-      
+
 });
 
 // GET: /appointments/:id/edit
