@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/css/bootstrap-datetimepicker.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+  </head>
+  <body>
+
+  <form id="formAppointment" name="formAppointment" method='post' action='/appointments' data-parsley-validate=''>
+    <div>
+       Name: <input type="text" name="name" id="inputName" placeholder="Name" required='' data-parsley-maxlength='20' data-parsley-maxlength-message="This field can't have more than 20 characters">
+    </div>
+    <div>
+       Phone Number: <input type="number" name="phoneNumber" id="inputPhoneNumber" required='' placeholder="Phone Number">
+    </div>
+
+      <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    Appointment Date:<input type='text' name="time" id="inputDate" class="form-control" placeholder="Date of Appointment" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+      </div>
+
+    <div>
+       Notification Time: <select name="notification" id="selectDelta" required=''>
+          <option value="">Select a time</option>
+          <option value="1"> 1 Minute</option>
+          <option value="15">15 Minutes</option>
+          <option value="30">30 Minutes</option>
+          <option value="45">45 Minutes</option>
+          <option value="60">60 Minutes</option>
+
+        </select>
+    </div>
+
+    <div>
+        Timezone: <select name="timeZone" id="selectTimeZone" required='' >
+          <% for (var i =0; i<timeZones.length; i++) {%>
+            <option value=<%= timeZones[i]%> > <%= timeZones[i]%> </option>
+
+          <% } %>
+
+
+        </select>
+    </div>
+
+
+<button type="submit">Create Appointment</button>
+
+  </form>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js'></script>
+   <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js'></script>
+     <script src='/javascripts/datetime-picker.js'></script>
+  </body>
+</html>
