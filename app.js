@@ -9,8 +9,8 @@ var bodyParser = require('body-parser');
 var appointments = require('./routes/appointments');
 var scheduler = require('./scheduler');
 
-var mongoose = require('mongoose')
-mongoose.connect(process.env.MONGO_URL)
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_URL);
 
 var app = express();
 
