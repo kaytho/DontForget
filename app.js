@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var appointments = require('./routes/appointments');
+var benice = require('./routes/benice');
 var scheduler = require('./scheduler');
 
 var mongoose = require('mongoose');
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/appointments', appointments);
 app.use('/', appointments);
+app.use('/benice', benice);
 
 
 // catch 404 and forward to error handler

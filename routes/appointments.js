@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/benice', function(req, res, next) {
-  res.render('appointments/benice', { title: 'Be Nice' });
+  res.render('appointments/benice', { title: 'Be Nice', timeZones: getTimeZones() });
 });
 
 // GET: /appointments/create

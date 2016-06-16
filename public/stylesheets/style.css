@@ -2,7 +2,15 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url('http://e2ua.com/data/wallpapers/42/WDF_894369.jpg');
+  color: white;
 }
+
+h1{
+  font-size: 20px;
+  color: white;
+  text-align: center;
+}
+
 
 a {
   color: #00B7FF;
