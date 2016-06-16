@@ -20,9 +20,13 @@ router.get('/', function(req, res, next) {
                 console.log(err);
                 res.send("Not working");
             } else {
-                res.render('appointments/index', { appointments: appointments, title: 'Fo', timeZones: getTimeZones() });
+                res.render('appointments/index', { appointments: appointments, title: 'DontForget', timeZones: getTimeZones() });
             }
         });
+});
+
+router.get('/benice', function(req, res, next) {
+  res.render('appointments/benice', { title: 'Be Nice' });
 });
 
 // GET: /appointments/create
