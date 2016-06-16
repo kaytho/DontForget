@@ -10,7 +10,7 @@ var getTimeZones = function() {
 };
 
 // GET: /appointments
-router.get('/', function(req, res, next) {
+router.get('/benice', function(req, res, next) {
     console.log('here i am');
     // res.render('appointments/index', { title: "Never"});
 
@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
                 console.log(err);
                 res.send("Not working");
             } else {
-                res.render('appointments/index', { appointments: appointments, title: 'DontForget', timeZones: getTimeZones() });
+                res.render('appointments/benice', { appointments: appointments, title: 'DontForget', timeZones: getTimeZones() });
             }
         });
 });
@@ -51,7 +51,7 @@ router.post('/', function(req, res, next) {
             console.log(err);
         } else {
             console.log('success');
-            // res.redirect('/');
+            res.redirect('/benice');
         }
     });
 
@@ -91,7 +91,7 @@ router.post('/:id/edit', function(req, res, next) {
                     console.log('error');
                 } else {
                     console.log('success');
-                    res.redirect('/');
+                    res.redirect('/benice');
                 }
             });
 
@@ -109,7 +109,7 @@ router.post('/:id/delete', function(req, res, next) {
         if(err){
             console.log(err);
         }else{
-          res.redirect('/');
+          res.redirect('/benice');
         }
     });
 });
