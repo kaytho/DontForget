@@ -9,7 +9,7 @@ var AppointmentSchema = new mongoose.Schema({
   phoneNumber: String,
   notification : Number,
   timeZone : String,
-  time : {type : Date, index : true}
+  // time : {type : Date, index : true}
 });
 
 AppointmentSchema.methods.requiresNotification = function (date) {
@@ -44,7 +44,7 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
             var options = {
                 to: "+1" + appointment.phoneNumber,
                 from: cfg.twilioPhoneNumber,
-                body: "Hi " + appointment.name + ". Just a reminder that you have an appointment coming up  " + moment(appointment.time).calendar() +"."
+                body: "Hi " + appointment.name + " . " + appointment.message + " " + moment().calendar() +"."
             };
 
             // Send the message!
