@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var momentTimeZone = require('moment-timezone');
 var moment = require('moment');
-var Appointment = require('../models/appointment');
+var Text = require('../models/text');
 
 
 var getTimeZones = function() {
@@ -10,47 +10,44 @@ var getTimeZones = function() {
 };
 
 // GET: /appointments
-router.get('/benice', function(req, res, next) {
-    console.log('here i am');
+router.get('/', function(req, res, next) {
+    console.log('Text: here i am');
     // res.render('appointments/index', { title: "Never"});
 
-    Appointment.find({}, function(err, appointments) {
-      console.log('after find');
+    Text.find({}, function(err, texts) {
+      console.log('Text: after find');
             if (err) {
                 console.log(err);
-                res.send("Not working");
+                res.send("Text find: Not working");
             } else {
-                res.render('appointments/benice', { appointments: appointments, title: 'DontForget', timeZones: getTimeZones() });
+                console.log("Text.find success: " + texts);
+                res.render('./appointments/benice', { texts: texts, title: 'DontForget', timeZones: getTimeZones() });
             }
         });
 });
 
-router.get('/benice', function(req, res, next) {
-  res.render('appointments/benice', { title: 'Be Nice' });
-});
-
 // GET: /appointments/create
 router.get('/create', function(req, res, next) {
-    res.render('appointments/create', { timeZones: getTimeZones(), appointment: new Appointment({ name: "", phoneNumber: "", notification: '', timeZone: "", time: '' }) });
+    res.render('appointments/create', { timeZones: getTimeZones(), text: new Text({ name: "", phoneNumber: "", notification: '', timeZone: "", time: '' }) });
 });
 
-// POST: /appointments
+// POST: /texts
 router.post('/', function(req, res, next) {
     var name = req.body.name;
     var phoneNumber = req.body.phoneNumber;
     var message = req.body.message;
     var notification = req.body.notification;
     var timeZone = req.body.timeZone;
-    var time = moment(req.body.time, "MM-DD-YYYY hh:mma");
-    var listOfAppointments= req.body.appointment;
+    // var time = moment(req.body.time, "MM-DD-YYYY hh:mma");
+    var listOfTexts= req.body.text;
 
-    var appointment = new Appointment({ name: name, phoneNumber: phoneNumber, message: message, notification: notification, time: time, timeZone: timeZone });
-    console.log(timeZone);
-    appointment.save(function(err) {
+    var text = new Text({ name: name, phoneNumber: phoneNumber, message: message, notification: notification,  timeZone: timeZone });
+    //console.log("TEXT: " + text);
+    text.save(function(err) {
         if (err) {
             console.log(err);
         } else {
-            console.log('success');
+            //console.log('Text save success');
             res.redirect('/benice');
         }
     });
@@ -60,9 +57,9 @@ router.post('/', function(req, res, next) {
 // GET: /appointments/:id/edit
 router.get('/:id/edit', function(req, res, next) {
     var id = req.params.id;
-    Appointment.findOne({ _id: id });
-    if (function(appointment) {
-            res.render('appointments/edit', { timeZones: getTimeZones(), appointment: appointment });
+    Text.findOne({ _id: id });
+    if (function(text) {
+            res.render('appointments/edit', { timeZones: getTimeZones(), text: text });
         });
 });
 
@@ -75,18 +72,18 @@ router.post('/:id/edit', function(req, res, next) {
     var timeZone = req.body.timeZone;
     var time = moment(req.body.time, "MM-DD-YYYY hh:mma");
 
-    Appointment.findOne({ _id: id }, function(err, appointment) {
+    Text.findOne({ _id: id }, function(err, text) {
         if (err) {
             console.log('error');
         } else {
-            appointment.name = name;
-            appointment.phoneNumber = phoneNumber;
-            appointment.notification = notification;
-            appointment.timeZone = timeZone;
-            appointment.time = time;
+            text.name = name;
+            text.phoneNumber = phoneNumber;
+            text.notification = notification;
+            text.timeZone = timeZone;
+            text.time = time;
 
 
-            appointment.save(function(err) {
+            text.save(function(err) {
                 if (err) {
                     console.log('error');
                 } else {
@@ -105,7 +102,7 @@ router.post('/:id/edit', function(req, res, next) {
 router.post('/:id/delete', function(req, res, next) {
     var id = req.params.id;
 
-    Appointment.remove({ _id: id }, function(err){
+    Text.remove({ _id: id }, function(err){
         if(err){
             console.log(err);
         }else{

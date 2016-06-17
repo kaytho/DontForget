@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <h1> Be Nice!</h1>
+    <h1> Text Me </h1>
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/css/bootstrap-datetimepicker.min.css">
@@ -15,7 +15,9 @@
       <a href="./appointments">Create a Reminder</a>
     </nav>
 
-
+  <div id="img">
+    <img src= "http://i.imgur.com/kDpj8PC.gif">
+  </div>
 
   <form id="formAppointment" name="formAppointment" method='post' action='/benice' data-parsley-validate=''>
     <div>
@@ -29,7 +31,7 @@
       Message: <input type="string" name="message" id="inputMessage" require='' placeholder=" hi i'm running late see you soon">
     </div>
 
-      <div class="row">
+      <!-- <div class="row">
         <div class='col-sm-6'>
             <div class="form-group">
                 <div class='input-group date' id='datetimepicker1'>
@@ -40,11 +42,12 @@
                 </div>
             </div>
         </div>
-      </div>
+      </div> -->
 
     <div>
        Notification Time: <select name="notification" id="selectDelta" required=''>
           <option value="">Select a time</option>
+          <option value="0">Now</option>
           <option value="1"> 1 Minute</option>
           <option value="15">15 Minutes</option>
           <option value="30">30 Minutes</option>

@@ -25,10 +25,6 @@ router.get('/', function(req, res, next) {
         });
 });
 
-router.get('/benice', function(req, res, next) {
-  res.render('appointments/benice', { title: 'Be Nice', timeZones: getTimeZones() });
-});
-
 // GET: /appointments/create
 router.get('/create', function(req, res, next) {
     res.render('appointments/create', { timeZones: getTimeZones(), appointment: new Appointment({ name: "", phoneNumber: "", notification: '', timeZone: "", time: '' }) });
