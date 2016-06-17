@@ -3,48 +3,56 @@ var moment = require('moment');
 var cfg = require('../config');
 var twilio = require('twilio');
 
-var AppointmentSchema = new mongoose.Schema({
+var TextSchema = new mongoose.Schema({
   name:String,
   message: String,
   phoneNumber: String,
   notification : Number,
   timeZone : String,
-  time : {type : Date, index : true}
+  // time : {type : Date, index : true}
 });
 
-AppointmentSchema.methods.requiresNotification = function (date) {
+
+TextSchema.methods.requiresNotification = function (date) {
+console.log("TextSchema.methods.requiresNotification");
+// var notificationTime = new Date();
+// console.log("notificationTime: " + notificationTime);
+
   return Math.round(moment.duration(moment(this.time).tz(this.timeZone).utc()
                           .diff(moment(date).utc())
                         ).asMinutes()) === this.notification;
 };
 
-AppointmentSchema.statics.sendNotifications = function(callback) {
-
+TextSchema.statics.sendNotifications = function(callback) {
+console.log("TextSchema.statics.sendNotifications");
   // now
   var searchDate = new Date();
-  Appointment
-    .find(function (err, appointments) {
+  Text
+    .find(function (err, texts) {
       if(err){
+        console.log("Text: there was an error searching for Text objects in db");
         console.log(err);
       }else{
-        appointments = appointments.filter(function(appointment) {
-              return appointment.requiresNotification(searchDate);
+        console.log("Text: We should be calling requiresNotification at least once now.")
+        texts = texts.filter(function(text) {
+              return text.requiresNotification(searchDate);
         });
-        if (appointments.length > 0) {
-          sendNotifications(appointments);
+        if (texts.length > 0) {
+          sendNotifications(texts);
         }
       }
     });
 
     // Send messages to all appoinment owners via Twilio
     function sendNotifications(docs) {
+      console.log('Text.sendNotifications');
         var client = new twilio.RestClient(cfg.twilioAccountSid, cfg.twilioAuthToken);
-        docs.forEach(function(appointment) {
+        docs.forEach(function(text) {
             // Create options to send the message
             var options = {
-                to: "+1" + appointment.phoneNumber,
+                to: "+1" + text.phoneNumber,
                 from: cfg.twilioPhoneNumber,
-                body: "Hi " + appointment.name + " . " + appointment.message + " " + moment(appointment.time).calendar() +"."
+                body: "Hi " + text.name + " . " + text.message
             };
 
             // Send the message!
@@ -54,8 +62,8 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
                     console.error(err);
                 } else {
                     // Log the last few digits of a phone number
-                    var masked = appointment.phoneNumber.substr(0,
-                        appointment.phoneNumber.length - 5);
+                    var masked = text.phoneNumber.substr(0,
+                        text.phoneNumber.length - 5);
                     masked += '*****';
                     console.log('Message sent to ' + masked);
                 }
@@ -71,5 +79,5 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
 };
 
 
-var Appointment = mongoose.model('appointment', AppointmentSchema);
-module.exports = Appointment;
+var Text = mongoose.model('text', TextSchema);
+module.exports = Text;
