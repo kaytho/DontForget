@@ -20,9 +20,9 @@
   </div>
 
   <form id="formAppointment" name="formAppointment" method='post' action='/benice' data-parsley-validate=''>
-    <div>
+    <!-- <div>
        Name: <input type="text" name="name" id="inputName" placeholder="Name" required='' data-parsley-maxlength='20' data-parsley-maxlength-message="This field can't have more than 20 characters">
-    </div>
+    </div> -->
     <div>
        Phone Number: <input type="number" name="phoneNumber" id="inputPhoneNumber" required='' placeholder="Phone Number">
     </div>
@@ -31,18 +31,18 @@
       Message: <input type="string" name="message" id="inputMessage" require='' placeholder=" hi i'm running late see you soon">
     </div>
 
-      <!-- <div class="row">
+      <div class="row">
         <div class='col-sm-6'>
             <div class="form-group">
                 <div class='input-group date' id='datetimepicker1'>
-                    Appointment Date:<input type='text' name="time" id="inputDate" class="form-control" placeholder="Date of Appointment" />
+                    Text Date:<input type='text' name="time" id="inputDate" class="form-control" placeholder="Date you want text sent" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
             </div>
         </div>
-      </div> -->
+      </div>
 
     <div>
        Notification Time: <select name="notification" id="selectDelta" required=''>
@@ -53,6 +53,7 @@
           <option value="30">30 Minutes</option>
           <option value="45">45 Minutes</option>
           <option value="60">60 Minutes</option>
+          <option value ="180">3 Hours</option>
 
         </select>
     </div>

@@ -40,7 +40,7 @@ router.post('/', function(req, res, next) {
     var time = moment(req.body.time, "MM-DD-YYYY hh:mma");
     var listOfAppointments= req.body.appointment;
 
-    var appointment = new Appointment({ name: name, phoneNumber: phoneNumber, message: message, notification: notification, time: time, timeZone: timeZone });
+    var appointment = new Appointment({ name: name, phoneNumber: phoneNumber,  notification: notification, time: time, timeZone: timeZone });
     console.log(timeZone);
     appointment.save(function(err) {
         if (err) {

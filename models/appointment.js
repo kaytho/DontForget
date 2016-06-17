@@ -5,7 +5,6 @@ var twilio = require('twilio');
 
 var AppointmentSchema = new mongoose.Schema({
   name:String,
-  message: String,
   phoneNumber: String,
   notification : Number,
   timeZone : String,
@@ -13,35 +12,28 @@ var AppointmentSchema = new mongoose.Schema({
 });
 
 AppointmentSchema.methods.requiresNotification = function (date) {
-  console.log("AppointmentSchema.methods.requiresNotification");
-
   return Math.round(moment.duration(moment(this.time).tz(this.timeZone).utc()
                           .diff(moment(date).utc())
                         ).asMinutes()) === this.notification;
 };
 
 AppointmentSchema.statics.sendNotifications = function(callback) {
-  console.log("AppointmentSchema.statics.sendNotifications");
 
   // now
   var searchDate = new Date();
   Appointment
     .find()
     .then(function (appointments) {
-      // if(err){
-      //   console.log(err);
-      // }else{
-        appointments = appointments.filter(function(appointment) {
+      appointments = appointments.filter(function(appointment) {
               return appointment.requiresNotification(searchDate);
-        });
-        if (appointments.length > 0) {
-          sendNotifications(appointments);
+      });
+      if (appointments.length > 0) {
+        sendNotifications(appointments);
       }
     });
 
     // Send messages to all appoinment owners via Twilio
     function sendNotifications(docs) {
-      console.log("Appointment.sendNotifications");
         var client = new twilio.RestClient(cfg.twilioAccountSid, cfg.twilioAuthToken);
         docs.forEach(function(appointment) {
             // Create options to send the message

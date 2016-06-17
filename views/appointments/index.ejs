@@ -15,62 +15,64 @@
       <a href="./benice">Go Automate a Text </a>
     </nav>
 
-    <img src="http://www.jamiesale-cartoonist.com/wp-content/uploads/cartoon-monkey-free.png">
-
-
-
-  <form id="formAppointment" name="formAppointment" method='post' action='/appointments' data-parsley-validate=''>
-    <div>
-       Name: <input type="text" name="name" id="inputName" placeholder="Name" required='' data-parsley-maxlength='20' data-parsley-maxlength-message="This field can't have more than 20 characters">
-    </div>
-    <div>
-       Phone Number: <input type="number" name="phoneNumber" id="inputPhoneNumber" required='' placeholder="Phone Number">
+    <div id="monkey">
+      <img src="http://www.jamiesale-cartoonist.com/wp-content/uploads/cartoon-monkey-free.png">
     </div>
 
-    <div>
-      Message: <input type="string" name="message" id="inputMessage" require='' placeholder=" hi i'm running late see you soon">
-    </div>
-
-      <div class="row">
-        <div class='col-sm-6'>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    Appointment Date:<input type='text' name="time" id="inputDate" class="form-control" placeholder="Date of Appointment" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
+<div id="form">
+    <form id="formAppointment" name="formAppointment" method='post' action='/appointments' data-parsley-validate=''>
+      <div>
+         Name: <input type="text" name="name" id="inputName" placeholder="Name" required='' data-parsley-maxlength='20' data-parsley-maxlength-message="This field can't have more than 20 characters">
+      </div>
+      <div>
+         Phone Number: <input type="number" name="phoneNumber" id="inputPhoneNumber" required='' placeholder="Phone Number">
       </div>
 
-    <div>
-       Notification Time: <select name="notification" id="selectDelta" required=''>
-          <option value="">Select a time</option>
-          <option value="1"> 1 Minute</option>
-          <option value="15">15 Minutes</option>
-          <option value="30">30 Minutes</option>
-          <option value="45">45 Minutes</option>
-          <option value="60">60 Minutes</option>
+      <!-- <div>
+        Message: <input type="string" name="message" id="inputMessage" require='' placeholder=" hi i'm running late see you soon">
+      </div> -->
 
-        </select>
-    </div>
+        <div class="row">
+          <div class='col-sm-6'>
+              <div class="form-group">
+                  <div class='input-group date' id='datetimepicker1'>
+                      Appointment Date:<input type='text' name="time" id="inputDate" class="form-control" placeholder="Date of Appointment" />
+                      <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                  </div>
+              </div>
+          </div>
+        </div>
 
-    <div>
-        Timezone: <select name="timeZone" id="selectTimeZone" required='' >
-          <% for (var i =0; i<timeZones.length; i++) {%>
-            <option value=<%= timeZones[i]%> > <%= timeZones[i]%> </option>
+      <div>
+         Notification Time: <select name="notification" id="selectDelta" required=''>
+            <option value="">Select a time</option>
+            <option value="1"> 1 Minute</option>
+            <option value="15">15 Minutes</option>
+            <option value="30">30 Minutes</option>
+            <option value="45">45 Minutes</option>
+            <option value="60">60 Minutes</option>
 
-          <% } %>
+          </select>
+      </div>
+
+      <div>
+          Timezone: <select name="timeZone" id="selectTimeZone" required='' >
+            <% for (var i =0; i<timeZones.length; i++) {%>
+              <option value=<%= timeZones[i]%> > <%= timeZones[i]%> </option>
+
+            <% } %>
 
 
-        </select>
-    </div>
+          </select>
+      </div>
 
 
-<button type="submit">Create Appointment</button>
+  <button type="submit">Create Appointment</button>
 
-  </form>
+    </form>
+</div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 

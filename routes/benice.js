@@ -38,10 +38,10 @@ router.post('/', function(req, res, next) {
     var message = req.body.message;
     var notification = req.body.notification;
     var timeZone = req.body.timeZone;
-    // var time = moment(req.body.time, "MM-DD-YYYY hh:mma");
+    var time = moment(req.body.time, "MM-DD-YYYY hh:mma");
     var listOfTexts= req.body.text;
 
-    var text = new Text({ name: name, phoneNumber: phoneNumber, message: message, notification: notification,  timeZone: timeZone });
+    var text = new Text({ name: name, phoneNumber: phoneNumber, message: message, notification: notification,  time: time, timeZone: timeZone });
     //console.log("TEXT: " + text);
     text.save(function(err) {
         if (err) {
