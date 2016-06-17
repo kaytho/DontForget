@@ -28,15 +28,14 @@ AppointmentSchema.statics.sendNotifications = function(callback) {
   Appointment
     .find()
     .then(function (appointments) {
-      if(err){
-        console.log(err);
-      }else{
+      // if(err){
+      //   console.log(err);
+      // }else{
         appointments = appointments.filter(function(appointment) {
               return appointment.requiresNotification(searchDate);
         });
         if (appointments.length > 0) {
           sendNotifications(appointments);
-        }
       }
     });
 
