@@ -1,7 +1,11 @@
+/* this page is the style sheet. It tells the page how to look. This is written in css */
+
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-image: url('http://e2ua.com/data/wallpapers/42/WDF_894369.jpg');
+  background-image: url('http://www.zingerbug.com/Backgrounds/background_images/dark_purple_mini_bricks_seamless_pattern.gif');
+  background-color: #4B0082;
   color: red;
 }
 /*forms for both pages*/
@@ -12,10 +16,6 @@ body {
    background-color:#4DA8DA;
    margin: auto;
    color:red;
-   /*text-align: center;
-   display:inline-table;
-   font-size: 30px;
-  position: fixed;*/
  }
  #formAppointment div{
    text-align: left;
@@ -26,8 +26,6 @@ body {
  #monkey img{
    height: 800px;
    width: 200px;
-   /*position:fixed;
-   margin: 0 auto;*/
  }
  #form {
    display: inline-block;

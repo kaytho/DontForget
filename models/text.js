@@ -3,6 +3,7 @@ var moment = require('moment');
 var cfg = require('../config');
 var twilio = require('twilio');
 
+//here i'm telling it how the information will go into the database and what the datatype is
 var TextSchema = new mongoose.Schema({
   name:String,
   message: String,
@@ -12,6 +13,7 @@ var TextSchema = new mongoose.Schema({
   time : {type : Date, index : true}
 });
 
+//setting timezones so that the messages will arrive at correct time
 TextSchema.methods.requiresNotification = function (date) {
   return Math.round(moment.duration(moment(this.time).tz(this.timeZone).utc()
                           .diff(moment(date).utc())
